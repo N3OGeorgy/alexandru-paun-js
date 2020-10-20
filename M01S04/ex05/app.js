@@ -6,7 +6,7 @@ if (testNumber === null || testNumber === '' || isNaN(testNumber)) {
   console.warn(`Nu ai introdus un numar. Se va folosi numarul ${testNumber}.`);
 }
 
-for (let i = 0; i <= 6; i++) {
+for (let i = 0; i <= 1000; i++) {
   console.log(i);
 
   if (i % testNumber !== 0) {
