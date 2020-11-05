@@ -31,3 +31,15 @@ let calculateSquareArea = (l) => {
   return squareArea;
 };
 console.log(`Patratul are ${calculateSquareArea(2)}mp.`);
+
+console.warn(`
+  Folosind aceasta noua functie calculeaza suprafata totala a doua dreptunghiuri de 48 pe 92 si 51 pe 102.
+`);
+let calculateAggregateSurface = (L1, l1, L2, l2) => {
+  let surface1 = calculateRectangleArea(L1, l1);
+  let surface2 = calculateRectangleArea(L2, l2);
+
+  return surface1 + surface2;
+};
+
+console.log(calculateAggregateSurface(48, 92, 51, 102));

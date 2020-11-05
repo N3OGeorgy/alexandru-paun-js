@@ -4,6 +4,7 @@
     let logMessage = (message) => {
       let paragraph = document.createElement('p');
       paragraph.innerText = message;
+      paragraph.classList.add('message');
 
       document.body.append(paragraph);
     };
