@@ -1,6 +1,16 @@
 let game = {
   cards: [],
   state: 'play',
+  get card() {
+    let cardsLength = this.cards.length;
+    let randomIndex = Math.floor(Math.random() * cardsLength) - 1;
+    let cardObject = this.cards[randomIndex];
+
+    // splice mutates
+    this.cards.splice(randomIndex, 1);
+
+    return cardObject;
+  },
   generateCards: function () {
     let upperLimit = 10;
     let suites = ['heart', 'club', 'spade', 'diamond'];
@@ -36,3 +46,6 @@ let game = {
     });
   },
 };
+
+game.generateCards();
+console.log(game);
