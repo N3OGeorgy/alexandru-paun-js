@@ -13,12 +13,21 @@
   }
 }
 
+.card__number {
+  display: inline;
+}
+
 .card__number--secondary {
   align-self: flex-end;
   transform: rotate(180deg);
 }
 
+.card__number--primary {
+  align-self: flex-start;
+}
+
 .card__digit {
   font-size: 22px;
+  line-height: 22px;
   font-weight: bold;
 }
