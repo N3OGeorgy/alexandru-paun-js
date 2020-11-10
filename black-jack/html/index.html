@@ -11,17 +11,37 @@
     http-equiv="X-UA-Compatible"
     content="ie=edge"
   >
+
+  <!-- <base href="/dragos"> -->
+
   <title>Black Jack</title>
 
   <link
     rel="stylesheet"
-    href="/css/style.css"
+    href="css/style.css"
   >
 </head>
 
 <body>
 
-  <script src="/js/app.min.js"></script>
+  <div class="container">
+    <section class="seat">
+      <div class="hand seat__hand">
+
+      </div>
+      <!-- .hand  -->
+
+      <div class="actions seat__actions">
+        <button class="btn btn-light">Stay</button>
+
+        <button class="btn btn-info">Hit Me</button>
+      </div>
+      <!-- .actions  -->
+    </section>
+    <!-- .seat  -->
+  </div>
+
+  <script src="js/app.min.js"></script>
 </body>
 
 </html>
