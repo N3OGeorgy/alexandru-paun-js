@@ -1,4 +1,6 @@
 const seatHand = document.querySelector('.seat .hand');
+const stayButton = document.querySelector('.js-stay');
+const hitButton = document.querySelector('.js-hit');
 
 const game = {
   cards: [],
@@ -51,14 +53,51 @@ const game = {
   deal: function (player) {
     player.hand = [this.card, this.card];
   },
+  check: function (player) {
+    if (player.points > 21) {
+      this.state = 'lost';
+    }
+
+    this.renderState();
+  },
+  checkRound: function (player) {
+    if (player.points > 21) {
+      this.state = 'lost';
+    } else {
+      this.state = 'won';
+    }
+
+    this.renderState();
+  },
+  renderState: function () {
+    const documentFragment = document.createElement('section');
+    documentFragment.classList.add('mt-4');
+    if (this.state !== 'play') {
+      const resetButton = document.createElement('button');
+      resetButton.classList.add('button');
+      resetButton.classList.add('button--shake');
+      resetButton.innerText = 'Reset Game';
+      resetButton.addEventListener('click', () => {
+        this.reset();
+      });
+
+      documentFragment.append(resetButton);
+
+      seatHand.parentElement.parentElement.append(documentFragment);
+    }
+  },
+  reset: function () {
+    this.generateCards();
+    this.deal(player);
+  },
 };
 
 const player = {
   points: 0,
   hand: [],
   renderHand: function () {
-    const documentFragment = document.createElement('div');
-
+    const documentFragment = new DocumentFragment();
+    documentFragment.innerHTML = '';
     /*eslint-disable*/
     this.hand.forEach((card) => {
       const template = `
@@ -100,7 +139,7 @@ const player = {
     });
     /*eslint-enable*/
 
-    seatHand.append(documentFragment);
+    seatHand.innerHTML = documentFragment.innerHTML;
   },
   hit: function () {
     this.hand.push(game.card);
@@ -120,6 +159,15 @@ const player = {
     return this.points;
   },
 };
+
+hitButton.addEventListener('click', () => {
+  player.hit().renderHand();
+  game.check(player);
+});
+
+stayButton.addEventListener('click', () => {
+  game.checkRound(player);
+});
 
 game.generateCards();
 game.deal(player);
