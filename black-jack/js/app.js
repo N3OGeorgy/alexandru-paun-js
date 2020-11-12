@@ -21,6 +21,9 @@ const game = {
     let suites = ['heart', 'club', 'spade', 'diamond'];
     let nonNumericCards = ['J', 'Q', 'K'];
 
+    // this.cards = [];
+    this.cards.length = 0;
+
     suites.forEach((suite) => {
       for (let i = 2; i <= upperLimit; i++) {
         let cardObject = {
@@ -52,6 +55,7 @@ const game = {
   },
   deal: function (player) {
     player.hand = [this.card, this.card];
+    player.renderHand();
   },
   check: function (player) {
     if (player.points > 21) {
@@ -77,8 +81,9 @@ const game = {
       resetButton.classList.add('button');
       resetButton.classList.add('button--shake');
       resetButton.innerText = 'Reset Game';
-      resetButton.addEventListener('click', () => {
+      resetButton.addEventListener('click', (event) => {
         this.reset();
+        event.target.remove();
       });
 
       documentFragment.append(resetButton);
@@ -89,6 +94,7 @@ const game = {
   reset: function () {
     this.generateCards();
     this.deal(player);
+    this.state = 'play';
   },
 };
 
@@ -161,15 +167,20 @@ const player = {
 };
 
 hitButton.addEventListener('click', () => {
+  if (game.state !== 'play') {
+    return;
+  }
   player.hit().renderHand();
   game.check(player);
 });
 
 stayButton.addEventListener('click', () => {
+  if (game.state !== 'play') {
+    return;
+  }
   game.checkRound(player);
 });
 
 game.generateCards();
 game.deal(player);
 player.calculatePoints();
-player.renderHand();
