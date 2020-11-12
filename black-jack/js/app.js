@@ -1,9 +1,12 @@
-let game = {
+const seatHand = document.querySelector('.seat .hand');
+
+const game = {
   cards: [],
   state: 'play',
+  // getter
   get card() {
     let cardsLength = this.cards.length;
-    let randomIndex = Math.floor(Math.random() * cardsLength) - 1;
+    let randomIndex = Math.floor(Math.random() * cardsLength) + 1;
     let cardObject = this.cards[randomIndex];
 
     // splice mutates
@@ -45,7 +48,80 @@ let game = {
       });
     });
   },
+  deal: function (player) {
+    player.hand = [this.card, this.card];
+  },
+};
+
+const player = {
+  points: 0,
+  hand: [],
+  renderHand: function () {
+    const documentFragment = document.createElement('div');
+
+    /*eslint-disable*/
+    this.hand.forEach((card) => {
+      const template = `
+        <div class="card${
+          ['diamond', 'heart'].includes(card.suite) === true ? ' card--red' : ''
+        }">
+          <div class="card__number card__number--primary">
+            <div class="card__digit">${card.displayValue}</div>
+
+            <div class="card__suite">
+              <svg
+                class="card__suite-icon"
+                viewBox="0 0 40 40"
+              >
+                <use xlink:href="#${card.suite}"></use>
+              </svg>
+            </div>
+          </div>
+          <!-- .card__number  -->
+
+          <div class="card__number card__number--secondary">
+            <div class="card__digit">${card.displayValue}</div>
+
+            <div class="card__suite">
+              <svg
+                class="card__suite-icon"
+                viewBox="0 0 40 40"
+              >
+                <use xlink:href="#${card.suite}"></use>
+              </svg>
+            </div>
+          </div>
+          <!-- .card__number  -->
+        </div>
+        <!-- .card  -->
+      `;
+
+      documentFragment.innerHTML += template;
+    });
+    /*eslint-enable*/
+
+    seatHand.append(documentFragment);
+  },
+  hit: function () {
+    this.hand.push(game.card);
+
+    this.calculatePoints();
+
+    return this;
+  },
+  calculatePoints: function () {
+    this.points = 0;
+
+    this.hand.forEach((card) => {
+      this.points += card.value;
+      // this.points = this.points + card.value;
+    });
+
+    return this.points;
+  },
 };
 
 game.generateCards();
-console.log(game);
+game.deal(player);
+player.calculatePoints();
+player.renderHand();
