@@ -6,7 +6,7 @@ const game = {
   // getter
   get card() {
     let cardsLength = this.cards.length;
-    let randomIndex = Math.floor(Math.random() * cardsLength) + 1;
+    let randomIndex = Math.floor(Math.random() * cardsLength);
     let cardObject = this.cards[randomIndex];
 
     // splice mutates
