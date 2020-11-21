@@ -1,8 +1,18 @@
 class Car {
-  constructor(left = 210, top = 8, color) {
+  constructor(
+    left = 210,
+    top = 8,
+    color,
+    wheelColor = 'black',
+    capColor = 'green',
+    areHazardsOn = false,
+  ) {
     this.left = left;
     this.top = top;
     this.color = color;
+    this.wheelColor = wheelColor;
+    this.capColor = capColor;
+    this.areHazardsOn = areHazardsOn;
   }
 
   frame = document.createElement('div');
@@ -15,6 +25,7 @@ class Car {
   wheelBack = document.createElement('div');
   hubCapFront = document.createElement('div');
   hubCapBack = document.createElement('div');
+  self = this;
 
   render() {
     this.frame.classList.add('frame');
@@ -36,8 +47,8 @@ class Car {
     // car lights
     this.lightFront.classList.add('light', 'light--front');
     this.lightBack.classList.add('light', 'light--back');
-    this.lightFront.style.backgroundColor = 'blue';
-    this.lightBack.style.backgroundColor = 'red';
+    // this.lightFront.style.backgroundColor = 'yellow';
+    // this.lightBack.style.backgroundColor = 'white';
     this.carBody.append(this.lightFront);
     this.carBody.append(this.lightBack);
 
@@ -47,29 +58,72 @@ class Car {
     this.carBody.append(this.wheelFront);
     this.carBody.append(this.wheelBack);
 
-    // hub caps
+    // car hubcaps
     this.hubCapFront.classList.add('wheel__cap');
     this.hubCapBack.classList.add('wheel__cap');
+    this.hubCapFront.style.backgroundColor = this.capColor;
+    this.hubCapBack.style.backgroundColor = this.capColor;
     this.wheelFront.append(this.hubCapFront);
     this.wheelBack.append(this.hubCapBack);
 
     document.body.append(this.frame);
   }
+
+  startPewPew() {
+    let wait = 1000;
+    let self = this;
+    for (let i = 0; i < 5; i++) {
+      wait = wait + 1000;
+      setTimeout(function () {
+        if (i % 2 === 0) {
+          self.lightFront.style.backgroundColor = 'blue';
+          self.lightBack.style.backgroundColor = 'red';
+        } else {
+          self.lightFront.style.backgroundColor = 'red';
+          self.lightBack.style.backgroundColor = 'blue';
+        }
+      }, wait);
+    }
+
+    setTimeout(
+      function () {
+        this.lightFront.style.backgroundColor = '';
+        this.lightBack.style.backgroundColor = '';
+      }.bind(this),
+      wait + 1000,
+    );
+  }
+
+  frontLightsOn() {
+    this.lightFront.classList.add('light--on');
+  }
+
+  frontLightsOff() {
+    this.lightFront.classList.remove('light--on');
+  }
+
+  engageBreak() {
+    this.lightBack.classList.add('light--on');
+  }
+
+  disengageBreak() {
+    this.lightBack.classList.remove('light--on');
+  }
+
+  toggleHazards() {
+    setInterval(() => {
+      if (this.areHazardsOn) {
+        this.areHazardsOn = false;
+        this.lightFront.classList.remove('light--on');
+        this.lightBack.classList.remove('light--on');
+      } else {
+        this.areHazardsOn = true;
+        this.lightBack.classList.add('light--on');
+        this.lightFront.classList.add('light--on');
+      }
+    }, 1000);
+  }
 }
 
 let car = new Car(250, 8, 'orange');
 car.render();
-
-let wait = 1000;
-for (let i = 0; i < 20; i++) {
-  wait = wait + 1000;
-  setTimeout(function () {
-    if (i % 2 === 0) {
-      car.lightFront.style.backgroundColor = 'blue';
-      car.lightBack.style.backgroundColor = 'red';
-    } else {
-      car.lightFront.style.backgroundColor = 'red';
-      car.lightBack.style.backgroundColor = 'blue';
-    }
-  }, wait);
-}
