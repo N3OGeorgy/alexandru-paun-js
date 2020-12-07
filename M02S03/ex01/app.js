@@ -10,13 +10,21 @@ class Car {
     this.displayDomSpeed();
   }
 
-  accelerate() {
-    this.speed++;
+  accelerate(speed) {
+    this.speed += speed;
+    this.displayDomSpeed();
     return this;
   }
 
-  decelerate() {
-    this.speed--;
+  decelerate(speed) {
+    this.speed -= speed;
+    this.displayDomSpeed();
+    return this;
+  }
+
+  setSpeed(speed) {
+    this.speed = speed;
+    this.displayDomSpeed();
     return this;
   }
 
@@ -33,14 +41,7 @@ class Car {
   }
 }
 
-var audi = new Car('Audi', 'black', 4, 50);
+var audi = new Car('Audi', 'black', 4, 0);
 
-audi
-  .accelerate()
-  .accelerate()
-  .accelerate()
-  .accelerate()
-  .accelerate()
-  .decelerate()
-  .decelerate()
-  .decelerate();
+audi.accelerate(12).decelerate(3).decelerate(4);
+audi.setSpeed(4).accelerate(1);
