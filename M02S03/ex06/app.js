@@ -18,3 +18,23 @@ const clickHandler = (event) => {
 };
 
 document.querySelector('.btn').addEventListener('click', clickHandler);
+
+const messageJS = 'Butonul JS a fost apasat';
+$('.btn2').on('click', () => {
+  let $width = $(window).width();
+  let $targetArticle = null;
+
+  if ($width < 650) {
+    $targetArticle = $('.lo-res');
+  } else if ($width >= 650 && $width < 1000) {
+    $targetArticle = $('.mid-res');
+  } else {
+    $targetArticle = $('.high-res');
+  }
+
+  $targetArticle.append(
+    $('<span>', {
+      text: messageJS,
+    }),
+  );
+});
