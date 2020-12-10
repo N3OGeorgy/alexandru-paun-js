@@ -1,5 +1,6 @@
 const box = document.querySelector('.box');
 const applyButton = document.getElementById('apply-button');
+const applyButton2 = document.getElementById('apply-button2');
 const className = 'animate-class';
 
 setTimeout(() => {
@@ -19,4 +20,11 @@ applyButton.addEventListener('click', () => {
 
 box.addEventListener('transitionend', () => {
   console.log('animatia a luat sfarsit');
+});
+
+applyButton2.addEventListener('click', () => {
+  box.classList.add(className);
+  box.addEventListener('transitionend', () => {
+    box.classList.toggle(className);
+  });
 });

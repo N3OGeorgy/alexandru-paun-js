@@ -4,12 +4,13 @@ const button = document.querySelector('.btn');
 
 const clickHandler = () => {
   console.log(message);
-  alert(message);
+  // alert(message);
 };
 button.addEventListener('click', clickHandler);
 
 window.addEventListener('resize', () => {
   const width = window.innerWidth;
+  // console.log(width);
 
   if (width <= breakPoint) {
     button.removeEventListener('click', clickHandler);

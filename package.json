@@ -1,0 +1,24 @@
+{
+  "name": "alexandru-paun",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N3OGeorgy/alexandru-paun-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/N3OGeorgy/alexandru-paun-js/issues"
+  },
+  "homepage": "https://github.com/N3OGeorgy/alexandru-paun-js#readme",
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "jquery-validation": "^1.19.2",
+    "pristinejs": "^0.1.9"
+  }
+}
