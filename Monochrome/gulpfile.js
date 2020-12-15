@@ -15,7 +15,7 @@ const sassLint = require('gulp-sass-lint');
 
 gulp.task('sass', function () {
   return gulp
-    .src(['./node_modules/pritinejs/dist/pristine.js', './js/**/*.js'])
+    .src(['./scss/**/*.scss'])
     .pipe(
       sassLint({
         configFile: './config/.sass-lint.yml',
@@ -40,7 +40,12 @@ gulp.task('sass', function () {
 
 gulp.task('js', function () {
   return gulp
-    .src(['./js/**/*.js'])
+    .src([
+      './node_modules/jquery/dist/jquery.js',
+      './node_modules/jquery-validation/dist/jquery.validate.js',
+      './node_modules/pristinejs/dist/pristine.js',
+      './js/**/*.js',
+    ])
     .pipe(
       eslint({
         useEslintrc: true,
