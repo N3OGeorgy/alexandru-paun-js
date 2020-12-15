@@ -15,11 +15,11 @@ const sassLint = require('gulp-sass-lint');
 
 gulp.task('sass', function () {
   return gulp
-    .src(['./scss/**/*.scss'])
+    .src(['./node_modules/pritinejs/dist/pristine.js', './js/**/*.js'])
     .pipe(
       sassLint({
         configFile: './config/.sass-lint.yml',
-      })
+      }),
     )
     .pipe(sassLint.format())
     .pipe(sassLint.failOnError())
@@ -29,8 +29,8 @@ gulp.task('sass', function () {
       mode.production(
         sass({
           outputStyle: 'compressed',
-        })
-      )
+        }),
+      ),
     )
     .pipe(rename('style.css'))
     .pipe(maps.write('./'))
@@ -45,7 +45,7 @@ gulp.task('js', function () {
       eslint({
         useEslintrc: true,
         configFile: './config/.eslintrc',
-      })
+      }),
     )
     .pipe(eslint.format())
     .pipe(eslint.failAfterError())
@@ -93,7 +93,7 @@ gulp.task('open', function () {
   return gulp.src('./dist/index.html').pipe(
     open({
       uri: 'http://localhost:8080',
-    })
+    }),
   );
 });
 
@@ -114,8 +114,8 @@ gulp.task(
     'html',
     'img',
     'fonts',
-    gulp.parallel('watch', 'connect', 'open')
-  )
+    gulp.parallel('watch', 'connect', 'open'),
+  ),
 );
 
 gulp.task('build', gulp.series('js', 'sass', 'html', 'img', 'fonts'));
