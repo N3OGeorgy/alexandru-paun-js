@@ -1,11 +1,9 @@
 $(() => {
   const buildPersonList = () => {
     const ulClass = 'person-list';
-    const ajaxResponse = '';
 
-    $.ajax('http://localhost:8080/persons', {
-      method: 'GET',
-    }).done((response) => {
+    axios.get('http://localhost:8080/persons').then((axiosResponse) => {
+      let response = axiosResponse.data;
       let $ul = $(`.${ulClass}`);
 
       if ($ul.length === 0) {
@@ -24,7 +22,7 @@ $(() => {
         const $skillsUl = $('<ul>');
 
         person.skills.forEach((skill) => {
-          const $li = $('<li>', {
+          $('<li>', {
             text: skill,
           }).appendTo($skillsUl);
         });
@@ -82,7 +80,7 @@ $(() => {
       const $nameInput = $(event.target).find('input[name="name"]');
       requestBody.person.name = $nameInput.val();
 
-      $.post('http://localhost:8080/persons', requestBody).done(() => {
+      axios.post('http://localhost:8080/persons', requestBody).then(() => {
         $nameInput.val('');
         $('.skillsUl').empty();
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+  <title>Persons</title>
+</head>
+
+<body>
+  <form id="personForm">
+    <fieldset>
+      <div>
+        <input
+          name="name"
+          id="name"
+          placeholder="name"
+        >
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <div>
+        <input
+          type="text"
+          name="skill"
+          id="skill"
+          placeholder="skill"
+        >
+        <button
+          type="button"
+          class="addSkill"
+        >Add</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <button type="submit">Send</button>
+    </fieldset>
+
+  </form>
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
